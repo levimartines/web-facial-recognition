@@ -3,8 +3,10 @@ import cv2
 from flask import Flask, render_template, Response
 
 detector_face = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-recognizer = cv2.face.FisherFaceRecognizer_create()
-recognizer.read("fisher_classifier.yml")
+#recognizer = cv2.face.FisherFaceRecognizer_create()
+#recognizer.read("fisher_classifier.yml")
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.read("lbph_classifier.yml")
 width, height = 220, 220
 font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 
@@ -16,9 +18,13 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/camera')
+def camera():
+    return render_template('camera.html')
+
+
 def gen():
-    url = "http://192.168.25.60:4747/video"
-    cap = cv2.VideoCapture(url)
+    cap = cv2.VideoCapture(0)
 
     while cap.isOpened():
         ret, img = cap.read()
@@ -29,12 +35,10 @@ def gen():
                 image_face = cv2.resize(image_grey[y:y + a, x:x + l], (width, height))
                 cv2.rectangle(img, (x, y), (x + l, y + a), (0, 0, 255), 2)
                 class_id, confidence = recognizer.predict(image_face)
-                if class_id == 1:
+                if class_id == 1 and confidence < 50:
                     nome = "Levi - ID: " + str(class_id)
-                elif class_id == 2:
+                elif class_id == 2 and confidence < 50:
                     nome = "Renan - ID: " + str(class_id)
-                elif class_id == 3:
-                    nome = "Sandra - ID: " + str(class_id)
                 else:
                     nome = "Unknow - ID: " + str(class_id)
                 cv2.putText(img, nome, (x, y + (a + 30)), font, 2, (0, 0, 255))

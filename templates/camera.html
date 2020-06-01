@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Streaming </title>
+</head>
+<body>
+<div class="d-flex flex-column">
+    <div>
+        <nav class="navbar navbar-dark bg-dark" style="justify-content: flex-start">
+            <a class="navbar-brand">
+                <img src="https://img2.gratispng.com/20180405/zdw/kisspng-zf-friedrichshafen-trw-automotive-business-company-c-5ac63397a88c95.1232403915229387756904.jpg"
+                     width="60" height="60" class="d-inline-block align-top" alt="">
+                <span style="font-size: 40px; margin-left: 20px">Controle de Acesso</span>
+            </a>
+
+            <a class="navbar-brand">
+                <a class="nav-link" href="/" style="font-size: 30px">Home</a>
+            </a>
+
+            <a class="navbar-brand">
+                <a class="nav-link" href="/camera" style="font-size: 30px">Camera</a>
+            </a>
+        </nav>
+    </div>
+    <br><br>
+    <div class="d-flex justify-content-center">
+        <img src="{{ url_for('video_feed') }}">
+    </div>
+</div>
+
+</body>
+</html>
