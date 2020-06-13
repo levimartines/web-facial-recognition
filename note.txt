@@ -1,2 +1,1 @@
-set FLASK_APP=stream_video.py
-flask run
+set FLASK_APP=stream_video.py && set FLASK_ENV=development && flask run

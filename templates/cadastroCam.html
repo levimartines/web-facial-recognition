@@ -1,10 +1,22 @@
-<html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Streaming </title>
 </head>
+
 <body>
+<script>
+    cams = 0;
+
+    function addCam() {
+        if (cams === 1) return;
+        var img = document.createElement("img");
+        img.src = 'video_capture';
+        var src = document.getElementById("divX");
+        src.appendChild(img);
+        cams = cams + 1;
+    }
+</script>
 <div class="d-flex flex-column">
     <div>
         <nav class="navbar navbar-dark bg-dark" style="justify-content: flex-start">
@@ -27,11 +39,14 @@
             </a>
         </nav>
     </div>
-    <br><br>
-    <div class="d-flex justify-content-center">
-        <img src="{{ url_for('video_feed') }}">
+    <br>
+    <div style="margin-left: 20px">
+
+        <button onclick="addCam()">Cadastrar fotos</button>
+
+    </div>
+    <div class="d-flex justify-content-center" id="divX">
+        {#<img src="{{ url_for('video_capture') }}" id="img" style="display: none">#}
     </div>
 </div>
-
 </body>
-</html>
